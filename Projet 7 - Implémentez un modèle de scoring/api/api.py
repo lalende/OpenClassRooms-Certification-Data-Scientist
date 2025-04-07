@@ -28,7 +28,7 @@ def api_id():
         except ValueError:
             return "Error: Are you sure you typed the customer ID correctly ? Please try again !"
     else:
-        return "Error: No id provided. Please provide a customer ID."
+        return """Error: No id provided. Please provide a customer ID. <br>The request should look like /api/v1/customer?id=12456"""
     # Select the customer in the dataframe
     customer = df.loc[df["SK_ID_CURR"]==customer_id, :]
     if customer.shape[0] != 1:
