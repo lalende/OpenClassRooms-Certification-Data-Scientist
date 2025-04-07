@@ -23,11 +23,16 @@ app.config["DEBUG"]=True
 @app.route("/api/v1/customer", methods=["GET"])
 def api_id():
     if "id" in request.args:
-        id=int(request.args["id"])
+        try:
+            customer_id=int(request.args["id"])
+        except ValueError:
+            return "Error: Are you sure you typed the customer ID correctly ? Please try again !"
     else:
         return "Error: No id provided. Please provide a customer ID."
     # Select the customer in the dataframe
-    customer = df.loc[df["SK_ID_CURR"]==id, :]
+    customer = df.loc[df["SK_ID_CURR"]==customer_id, :]
+    if customer.shape[0] != 1:
+        return "Error: Bad customer ID provided. Please try again !"
     # Make the predictions
     results = model.predict_proba(customer)
     result = model.predict(customer)
