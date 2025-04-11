@@ -17,9 +17,6 @@ model = pickle.load(open("./model/model.pkl", "rb"))
 # Load the data
 df = pd.read_csv("./cleaned_data/test_data_cleaned.csv").drop("TARGET", axis=1)
 
-# Launch the debugger
-app.config["DEBUG"]=True
-
 @app.route("/api/v1/customer", methods=["GET"])
 def api_id():
     if "id" in request.args:
@@ -54,4 +51,4 @@ def api_id():
     }
     return jsonify(response)
 
-app.run()
+app.run(host="0.0.0.0", port=5000)

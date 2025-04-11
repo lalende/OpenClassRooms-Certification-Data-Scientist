@@ -22,4 +22,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd /home/${{ secrets.VPS_USER }}/OC-DS
             git pull origin main
+            cd "Projet 7 - Implémentez un modèle de scoring"
+            docker-compose down
+            docker-compose up --build -d
           EOF
